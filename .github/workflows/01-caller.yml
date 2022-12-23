@@ -13,7 +13,7 @@ jobs:
           gh secret set PERSISTENT_SECRET --body "This secret is never deleted"
           gh secret set VOLATILE_SECRET --body "This secret will be deleted at the end of this workflow"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ github.token }}
   
   call-other-workflow:
     needs: create-new-secret
@@ -29,5 +29,5 @@ jobs:
         run: |
           gh secret delete VOLATILE_SECRET
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ github.token }}
 
