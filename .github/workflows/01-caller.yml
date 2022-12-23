@@ -1,0 +1,31 @@
+name: 01 - Caller workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-new-secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+        gh secret set PERSISTENT_SECRET --body "This secret is never deleted"
+        gh secret set VOLATILE_SECRET --body "This secret will be deleted at the end of this workflow"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+  
+  call-other-workflow:
+    needs: create-new-secret
+    uses: ./.github/workflows/02-callee.yml
+    secrets: inherit
+  
+  delete-volatile-secret:
+    needs: call-other-workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+        gh secret delete VOLATILE_SECRET
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+

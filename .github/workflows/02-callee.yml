@@ -1,0 +1,15 @@
+name: 02 - Called workflow
+
+on:
+  workflow_call:
+
+jobs:
+  access-secrets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+        persistentSecret="${{ secrets.PERSISTENT_SECRET }}"
+        echo "Persistent secret value is \"$persistentSecret\", length is ${#persistentSecret}"
+        volatileSecret="${{ secrets.VOLATILE_SECRET }}"
+        echo "Volatile secret value is \"$volatileSecret\", length is ${#volatileSecret}"
