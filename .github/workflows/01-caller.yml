@@ -30,6 +30,7 @@ jobs:
         run: |
           volatileSecret="${{ secrets.VOLATILE_SECRET }}"
           echo "Deleting volatile secret whose length is ${#volatileSecret}"
+          echo "gh secret list output: $(gh secret list)"
           gh secret delete VOLATILE_SECRET
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
