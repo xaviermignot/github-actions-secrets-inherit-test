@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Remove volatile secret
         run: |
+          volatileSecret="${{ secrets.VOLATILE_SECRET }}"
+          echo "Deleting volatile secret whose length is ${#volatileSecret}"
           gh secret delete VOLATILE_SECRET
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
