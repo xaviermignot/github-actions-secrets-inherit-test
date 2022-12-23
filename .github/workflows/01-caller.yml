@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
       - name: Initialize secrets
         run: |
           gh secret set PERSISTENT_SECRET --body "This secret is never deleted"
@@ -25,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
       - name: Remove volatile secret
         run: |
           gh secret delete VOLATILE_SECRET
