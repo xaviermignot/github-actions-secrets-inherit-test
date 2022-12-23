@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Initialize secrets
         run: |
-          gh secret set PERSISTENT_SECRET --body "This secret is never deleted"
           gh secret set VOLATILE_SECRET --body "This secret will be deleted at the end of this workflow"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
