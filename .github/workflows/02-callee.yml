@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: |
-        persistentSecret="${{ secrets.PERSISTENT_SECRET }}"
-        echo "Persistent secret value is \"$persistentSecret\", length is ${#persistentSecret}"
-        volatileSecret="${{ secrets.VOLATILE_SECRET }}"
-        echo "Volatile secret value is \"$volatileSecret\", length is ${#volatileSecret}"
+      - name: Access secrets
+        run: |
+          persistentSecret="${{ secrets.PERSISTENT_SECRET }}"
+          echo "Persistent secret value is \"$persistentSecret\", length is ${#persistentSecret}"
+          volatileSecret="${{ secrets.VOLATILE_SECRET }}"
+          echo "Volatile secret value is \"$volatileSecret\", length is ${#volatileSecret}"
